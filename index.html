@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>러닉</title>
+<meta name="description" content="전국 9,284명 학원 강사의 경력·합격 실적·수업 스타일을 데이터로 비교합니다. 과목별·지역별 강사 정보 플랫폼.">
+<meta name="keywords" content="강사비교, 학원강사, 강사경력, 강사실적, 수업스타일, 강사추천, 교육전문가">
+<link rel="canonical" href="https://learnic.kr/">
+<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://learnic.kr/">
+<meta property="og:site_name" content="러닉">
+<meta property="og:title" content="러닉 | 학원 강사 비교">
+<meta property="og:description" content="전국 9,284명 학원 강사의 경력·합격 실적·수업 스타일을 데이터로 비교합니다.">
+<meta property="og:image" content="https://learnic.kr/apple-touch-icon.png">
+<meta property="og:locale" content="ko_KR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+:root{
+  --orange:#EA580C;
+  --orange-d:#C2410C;
+  --orange-bg:#FFF7ED;
+  --dark:#1C1410;
+  --text2:#78716C;
+  --border:#E7E0D8;
+  --bg:#FAFAF9;
+  --surface:#FFFFFF;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden;word-break:keep-all}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:60px;background:rgba(250,250,249,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 32px;height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:20px;font-weight:800;letter-spacing:-0.04em;color:var(--dark)}
+.nav-logo em{color:var(--orange);font-style:normal}
+.nav-right{font-size:12px;font-weight:500;color:var(--text2);letter-spacing:0.01em}
+
+/* HERO */
+.hero{background:var(--dark);padding:96px 32px 80px;position:relative;overflow:hidden}
+.hero::after{
+  content:'LEARNIC';
+  position:absolute;right:-12px;bottom:-48px;
+  font-family:'Inter',sans-serif;
+  font-size:240px;font-weight:900;letter-spacing:-0.05em;line-height:1;
+  color:rgba(255,255,255,0.025);pointer-events:none;
+}
+.hero-inner{max-width:1280px;margin:0 auto;display:grid;gap:56px;position:relative;z-index:1}
+@media(min-width:900px){.hero-inner{grid-template-columns:1fr 300px;align-items:end;gap:64px}}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:28px}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:2px;background:var(--orange);flex-shrink:0}
+.hero-title{font-size:clamp(52px,8vw,96px);font-weight:800;letter-spacing:-0.04em;line-height:0.97;color:#fff;margin-bottom:28px}
+.hero-title .hl{color:var(--orange)}
+.hero-desc{font-size:16px;color:rgba(255,255,255,0.38);line-height:1.8;max-width:460px;font-weight:300}
+.hero-panel{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.07)}
+.hp{padding:26px 20px;background:var(--dark)}
+.hp-num{font-size:34px;font-weight:800;letter-spacing:-0.04em;color:var(--orange);line-height:1;margin-bottom:8px}
+.hp-label{font-size:10px;color:rgba(255,255,255,0.28);letter-spacing:0.1em;text-transform:uppercase;line-height:1.6}
+
+/* TICKER */
+.ticker{background:var(--orange);padding:12px 0;overflow:hidden}
+.ticker-track{display:flex;gap:0;white-space:nowrap}
+.ti{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.9);padding:0 40px;border-right:1px solid rgba(255,255,255,0.25);flex-shrink:0}
+.ti:last-child{border-right:none}
+.ti strong{color:#fff}
+
+/* LAYOUT */
+.container{max-width:1280px;margin:0 auto;padding:0 32px}
+.section{padding:80px 0}
+.section+.section{border-top:1px solid var(--border)}
+.sec-hd{margin-bottom:48px}
+.sec-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.sec-title{font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-0.03em}
+.sec-sub{font-size:15px;color:var(--text2);margin-top:10px;line-height:1.65;max-width:520px;font-weight:300}
+
+/* INSTRUCTOR CARDS */
+.inst-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(min-width:640px){.inst-grid{grid-template-columns:repeat(3,1fr)}}
+
+.ic{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:26px;position:relative;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s}
+.ic::before{
+  content:attr(data-init);
+  position:absolute;top:-20px;right:8px;
+  font-family:'Inter',sans-serif;
+  font-size:110px;font-weight:900;color:rgba(234,88,12,0.05);
+  line-height:1;pointer-events:none;
+}
+.ic-rank{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+.ic-avatar{width:48px;height:48px;border-radius:12px;background:var(--orange-bg);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--orange-d);margin-bottom:14px;flex-shrink:0}
+.ic-name{font-size:17px;font-weight:700;letter-spacing:-0.02em;color:var(--dark);margin-bottom:3px}
+.ic-loc{font-size:12px;color:var(--text2);margin-bottom:18px}
+.ic-divider{height:1px;background:var(--border);margin-bottom:16px}
+.ic-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px}
+.ic-row-l{color:var(--text2)}
+.ic-row-v{font-weight:600;color:var(--dark)}
+.ic-row-v.hi{color:var(--orange)}
+.ic-tag{display:inline-flex;align-items:center;font-size:10px;font-weight:700;background:var(--orange-bg);color:var(--orange-d);padding:4px 10px;border-radius:20px;margin-top:14px;letter-spacing:0.04em}
+
+/* SUBJECT TABLE */
+.subj-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.subj-table{width:100%;border-collapse:collapse;min-width:600px}
+.subj-table thead tr{border-bottom:2px solid var(--dark)}
+.subj-table th{padding:14px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2)}
+.subj-table td{padding:22px 16px;border-bottom:1px solid var(--border);font-size:14px}
+.subj-table tbody tr:last-child td{border-bottom:none}
+.subj-table tbody tr:hover td{background:var(--orange-bg)}
+.st-name{font-size:17px;font-weight:700;letter-spacing:-0.01em}
+.st-bar{display:flex;align-items:center;gap:10px}
+.st-track{height:4px;background:var(--border);border-radius:2px;width:100px;flex-shrink:0}
+.st-fill{height:100%;background:var(--orange);border-radius:2px}
+.st-pct{font-size:13px;font-weight:700;color:var(--orange);min-width:36px}
+.st-num{font-weight:600}
+.st-muted{color:var(--text2)}
+
+/* REGION GRID */
+.region-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:560px){.region-grid{grid-template-columns:repeat(4,1fr)}}
+.rg{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 18px}
+.rg-name{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:12px}
+.rg-num{font-size:30px;font-weight:800;letter-spacing:-0.04em;line-height:1;color:var(--dark);margin-bottom:4px}
+.rg-num sup{font-size:13px;font-weight:500;color:var(--text2);vertical-align:super}
+.rg-label{font-size:11px;color:var(--text2);margin-bottom:14px}
+.rg-bar{height:3px;background:var(--border);border-radius:2px}
+.rg-fill{height:100%;background:var(--orange);border-radius:2px}
+
+/* DARK SECTION */
+.dark-sec{background:var(--dark);padding:88px 32px}
+.dark-inner{max-width:1280px;margin:0 auto;display:grid;gap:56px}
+@media(min-width:768px){.dark-inner{grid-template-columns:1fr 1fr;gap:80px;align-items:start}}
+.dk-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
+.dk-title{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:16px;line-height:1.1}
+.dk-body{font-size:15px;color:rgba(255,255,255,0.38);line-height:1.85;font-weight:300}
+.dk-list{}
+.dk-row{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dk-row:first-child{border-top:1px solid rgba(255,255,255,0.06)}
+.dk-row-l{font-size:14px;color:rgba(255,255,255,0.42)}
+.dk-row-v{font-size:20px;font-weight:700;letter-spacing:-0.02em;color:#fff}
+.dk-row-v.orange{color:var(--orange)}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);padding:32px 32px}
+.foot-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.f-logo{font-size:20px;font-weight:800;letter-spacing:-0.04em;color:#fff}
+.f-logo em{color:var(--orange);font-style:normal}
+.f-meta{font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:0.02em}
+
+@media(max-width:640px){
+  .nav-right{display:none}
+  .hero{padding:72px 24px 56px}
+  .hero::after{display:none}
+  .dark-sec{padding:64px 24px}
+  .container{padding:0 24px}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "@id": "https://learnic.kr/#organization",
+  "name": "러닉",
+  "alternateName": ["Learnic", "러닉 강사비교"],
+  "url": "https://learnic.kr",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://learnic.kr/apple-touch-icon.png",
+    "width": 180,
+    "height": 180
+  },
+  "image": "https://learnic.kr/apple-touch-icon.png",
+  "description": "전국 학원 강사 경력·합격 실적·수업 스타일 비교 플랫폼",
+  "areaServed": "대한민국",
+  "telephone": "010-3728-5190",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "서울특별시 강서구 화곡동 394",
+    "addressCountry": "KR"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://learnic.kr/#website",
+  "name": "러닉",
+  "alternateName": ["Learnic", "러닉 강사비교"],
+  "url": "https://learnic.kr",
+  "publisher": {
+    "@id": "https://learnic.kr/#organization"
+  },
+  "inLanguage": "ko-KR"
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">러<em>닉</em></div>
+    <div class="nav-right">학원 강사 비교 플랫폼</div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Instructor Data Platform · 2026</div>
+      <h1 class="hero-title">강사를<br><span class="hl">데이터로</span><br>증명한다</h1>
+      <p class="hero-desc">합격 실적, 경력 연수, 수업 스타일 — 전국 9,284명 학원 강사의 모든 정보를 수치로 비교합니다. 홍보가 아닌 데이터로 강사를 선택하세요.</p>
+    </div>
+    <div class="hero-panel">
+      <div class="hp"><div class="hp-num">9,284</div><div class="hp-label">검증 강사 수</div></div>
+      <div class="hp"><div class="hp-num">94%</div><div class="hp-label">평균 합격률</div></div>
+      <div class="hp"><div class="hp-num">9.3년</div><div class="hp-label">평균 경력</div></div>
+      <div class="hp"><div class="hp-num">★ 4.8</div><div class="hp-label">평균 만족도</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ti"><strong>9,284명</strong> 강사 데이터</div>
+    <div class="ti">평균 경력 <strong>9.3년</strong></div>
+    <div class="ti">합격 실적 <strong>124,820건</strong> 검증</div>
+    <div class="ti">수강생 만족도 <strong>48,204건</strong></div>
+    <div class="ti">과목별 <strong>6개</strong> 분류</div>
+    <div class="ti">전국 <strong>17개</strong> 시도</div>
+    <div class="ti">재수강율 <strong>67%</strong></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <div class="sec-hd">
+      <div class="sec-eyebrow">Top Instructors</div>
+      <h2 class="sec-title">주목받는 강사</h2>
+      <p class="sec-sub">합격 실적·경력·수강생 만족도를 종합 집계한 러닉 상위 강사입니다.</p>
+    </div>
+    <div class="inst-grid">
+
+      <div class="ic" data-init="K">
+        <div class="ic-rank">No. 01 · 수학 부문</div>
+        <div class="ic-avatar">김</div>
+        <div class="ic-name">김민준</div>
+        <div class="ic-loc">서울 강남구 대치동 · 수능수학 전문</div>
+        <div class="ic-divider"></div>
+        <div class="ic-row"><span class="ic-row-l">강의 경력</span><span class="ic-row-v">15년</span></div>
+        <div class="ic-row"><span class="ic-row-l">합격률</span><span class="ic-row-v hi">98%</span></div>
+        <div class="ic-row"><span class="ic-row-l">월 수강료</span><span class="ic-row-v">45만원</span></div>
+        <div class="ic-row"><span class="ic-row-l">만족도</span><span class="ic-row-v hi">★ 4.9</span></div>
+        <div class="ic-tag">수능수학 1등급 전문</div>
+      </div>
+
+      <div class="ic" data-init="L">
+        <div class="ic-rank">No. 02 · 영어 부문</div>
+        <div class="ic-avatar">이</div>
+        <div class="ic-name">이서연</div>
+        <div class="ic-loc">서울 양천구 목동 · 내신+수능 영어</div>
+        <div class="ic-divider"></div>
+        <div class="ic-row"><span class="ic-row-l">강의 경력</span><span class="ic-row-v">11년</span></div>
+        <div class="ic-row"><span class="ic-row-l">합격률</span><span class="ic-row-v hi">94%</span></div>
+        <div class="ic-row"><span class="ic-row-l">월 수강료</span><span class="ic-row-v">38만원</span></div>
+        <div class="ic-row"><span class="ic-row-l">만족도</span><span class="ic-row-v hi">★ 4.8</span></div>
+        <div class="ic-tag">원어민 출신 공동 수업</div>
+      </div>
+
+      <div class="ic" data-init="P">
+        <div class="ic-rank">No. 03 · 과학 부문</div>
+        <div class="ic-avatar">박</div>
+        <div class="ic-name">박준혁</div>
+        <div class="ic-loc">경기 성남시 분당구 · 수능과학 전문</div>
+        <div class="ic-divider"></div>
+        <div class="ic-row"><span class="ic-row-l">강의 경력</span><span class="ic-row-v">8년</span></div>
+        <div class="ic-row"><span class="ic-row-l">합격률</span><span class="ic-row-v hi">91%</span></div>
+        <div class="ic-row"><span class="ic-row-l">월 수강료</span><span class="ic-row-v">36만원</span></div>
+        <div class="ic-row"><span class="ic-row-l">만족도</span><span class="ic-row-v hi">★ 4.9</span></div>
+        <div class="ic-tag">물리·화학 2과목 전문</div>
+      </div>
+
+      <div class="ic" data-init="C">
+        <div class="ic-rank">No. 04 · 국어 부문</div>
+        <div class="ic-avatar">최</div>
+        <div class="ic-name">최수아</div>
+        <div class="ic-loc">서울 노원구 중계동 · 국어·논술 병행</div>
+        <div class="ic-divider"></div>
+        <div class="ic-row"><span class="ic-row-l">강의 경력</span><span class="ic-row-v">13년</span></div>
+        <div class="ic-row"><span class="ic-row-l">합격률</span><span class="ic-row-v hi">89%</span></div>
+        <div class="ic-row"><span class="ic-row-l">월 수강료</span><span class="ic-row-v">32만원</span></div>
+        <div class="ic-row"><span class="ic-row-l">만족도</span><span class="ic-row-v hi">★ 4.7</span></div>
+        <div class="ic-tag">비문학 속독법 특화</div>
+      </div>
+
+      <div class="ic" data-init="J">
+        <div class="ic-rank">No. 05 · 논술 부문</div>
+        <div class="ic-avatar">정</div>
+        <div class="ic-name">정태양</div>
+        <div class="ic-loc">서울 강남구 서초동 · 대입논술 전문</div>
+        <div class="ic-divider"></div>
+        <div class="ic-row"><span class="ic-row-l">강의 경력</span><span class="ic-row-v">9년</span></div>
+        <div class="ic-row"><span class="ic-row-l">합격률</span><span class="ic-row-v hi">93%</span></div>
+        <div class="ic-row"><span class="ic-row-l">월 수강료</span><span class="ic-row-v">42만원</span></div>
+        <div class="ic-row"><span class="ic-row-l">만족도</span><span class="ic-row-v hi">★ 4.8</span></div>
+        <div class="ic-tag">SKY 논술 합격 127명</div>
+      </div>
+
+      <div class="ic" data-init="H">
+        <div class="ic-rank">No. 06 · 코딩 부문</div>
+        <div class="ic-avatar">한</div>
+        <div class="ic-name">한지원</div>
+        <div class="ic-loc">경기 성남시 판교 · IT 코딩 전문</div>
+        <div class="ic-divider"></div>
+        <div class="ic-row"><span class="ic-row-l">강의 경력</span><span class="ic-row-v">6년</span></div>
+        <div class="ic-row"><span class="ic-row-l">수료율</span><span class="ic-row-v hi">96%</span></div>
+        <div class="ic-row"><span class="ic-row-l">월 수강료</span><span class="ic-row-v">34만원</span></div>
+        <div class="ic-row"><span class="ic-row-l">만족도</span><span class="ic-row-v hi">★ 4.8</span></div>
+        <div class="ic-tag">현직 IT기업 재직중</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <div class="sec-hd">
+      <div class="sec-eyebrow">By Subject</div>
+      <h2 class="sec-title">과목별 강사 현황</h2>
+    </div>
+    <div class="subj-wrap">
+      <table class="subj-table">
+        <thead>
+          <tr>
+            <th>과목</th>
+            <th>강사 수</th>
+            <th>합격률</th>
+            <th>평균 경력</th>
+            <th>평균 수강료</th>
+            <th>만족도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="st-name">수학</div></td>
+            <td><span class="st-num">2,841명</span></td>
+            <td>
+              <div class="st-bar">
+                <div class="st-track"><div class="st-fill" style="width:91%"></div></div>
+                <span class="st-pct">91%</span>
+              </div>
+            </td>
+            <td><span class="st-num">11.2년</span></td>
+            <td><span class="st-num">월 33만원</span></td>
+            <td>★ 4.8</td>
+          </tr>
+          <tr>
+            <td><div class="st-name">영어</div></td>
+            <td><span class="st-num">2,104명</span></td>
+            <td>
+              <div class="st-bar">
+                <div class="st-track"><div class="st-fill" style="width:88%"></div></div>
+                <span class="st-pct">88%</span>
+              </div>
+            </td>
+            <td><span class="st-num">9.8년</span></td>
+            <td><span class="st-num">월 28만원</span></td>
+            <td>★ 4.7</td>
+          </tr>
+          <tr>
+            <td><div class="st-name">과학</div></td>
+            <td><span class="st-num">1,382명</span></td>
+            <td>
+              <div class="st-bar">
+                <div class="st-track"><div class="st-fill" style="width:85%"></div></div>
+                <span class="st-pct">85%</span>
+              </div>
+            </td>
+            <td><span class="st-num">8.4년</span></td>
+            <td><span class="st-num">월 31만원</span></td>
+            <td>★ 4.8</td>
+          </tr>
+          <tr>
+            <td><div class="st-name">국어</div></td>
+            <td><span class="st-num">1,247명</span></td>
+            <td>
+              <div class="st-bar">
+                <div class="st-track"><div class="st-fill" style="width:83%"></div></div>
+                <span class="st-pct">83%</span>
+              </div>
+            </td>
+            <td><span class="st-num">10.1년</span></td>
+            <td><span class="st-num">월 27만원</span></td>
+            <td>★ 4.7</td>
+          </tr>
+          <tr>
+            <td><div class="st-name">논술</div></td>
+            <td><span class="st-num">842명</span></td>
+            <td>
+              <div class="st-bar">
+                <div class="st-track"><div class="st-fill" style="width:87%"></div></div>
+                <span class="st-pct">87%</span>
+              </div>
+            </td>
+            <td><span class="st-num">7.6년</span></td>
+            <td><span class="st-num">월 35만원</span></td>
+            <td>★ 4.8</td>
+          </tr>
+          <tr>
+            <td><div class="st-name">코딩</div></td>
+            <td><span class="st-num">868명</span></td>
+            <td>
+              <div class="st-bar">
+                <div class="st-track"><div class="st-fill" style="width:93%"></div></div>
+                <span class="st-pct">93%</span>
+              </div>
+            </td>
+            <td><span class="st-num">5.2년</span></td>
+            <td><span class="st-num">월 30만원</span></td>
+            <td>★ 4.9</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <div class="sec-hd">
+      <div class="sec-eyebrow">By Region</div>
+      <h2 class="sec-title">지역별 강사 분포</h2>
+    </div>
+    <div class="region-grid">
+      <div class="rg">
+        <div class="rg-name">서울특별시</div>
+        <div class="rg-num">4,210<sup>명</sup></div>
+        <div class="rg-label">전체의 45%</div>
+        <div class="rg-bar"><div class="rg-fill" style="width:100%"></div></div>
+      </div>
+      <div class="rg">
+        <div class="rg-name">경기도</div>
+        <div class="rg-num">2,847<sup>명</sup></div>
+        <div class="rg-label">전체의 31%</div>
+        <div class="rg-bar"><div class="rg-fill" style="width:68%"></div></div>
+      </div>
+      <div class="rg">
+        <div class="rg-name">부산광역시</div>
+        <div class="rg-num">892<sup>명</sup></div>
+        <div class="rg-label">전체의 10%</div>
+        <div class="rg-bar"><div class="rg-fill" style="width:21%"></div></div>
+      </div>
+      <div class="rg">
+        <div class="rg-name">인천광역시</div>
+        <div class="rg-num">724<sup>명</sup></div>
+        <div class="rg-label">전체의 8%</div>
+        <div class="rg-bar"><div class="rg-fill" style="width:17%"></div></div>
+      </div>
+      <div class="rg">
+        <div class="rg-name">대구광역시</div>
+        <div class="rg-num">648<sup>명</sup></div>
+        <div class="rg-label">전체의 7%</div>
+        <div class="rg-bar"><div class="rg-fill" style="width:15%"></div></div>
+      </div>
+      <div class="rg">
+        <div class="rg-name">대전광역시</div>
+        <div class="rg-num">498<sup>명</sup></div>
+        <div class="rg-label">전체의 5%</div>
+        <div class="rg-bar"><div class="rg-fill" style="width:12%"></div></div>
+      </div>
+      <div class="rg">
+        <div class="rg-name">광주광역시</div>
+        <div class="rg-num">342<sup>명</sup></div>
+        <div class="rg-label">전체의 4%</div>
+        <div class="rg-bar"><div class="rg-fill" style="width:8%"></div></div>
+      </div>
+      <div class="rg">
+        <div class="rg-name">기타 지역</div>
+        <div class="rg-num">123<sup>명</sup></div>
+        <div class="rg-label">전체의 1%</div>
+        <div class="rg-bar"><div class="rg-fill" style="width:3%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dark-sec">
+  <div class="dark-inner">
+    <div>
+      <div class="dk-eyebrow">Data Transparency</div>
+      <h2 class="dk-title">강사 데이터를<br>신뢰하는 이유</h2>
+      <p class="dk-body">러닉의 모든 강사 정보는 직접 검증한 1차 데이터입니다. 합격 실적은 해당 기관 제출 자료와 수강생 인터뷰를 교차 검증하여 수집합니다. 광고비를 받지 않으며, 어떠한 기관과도 제휴 관계가 없습니다.</p>
+    </div>
+    <div class="dk-list">
+      <div class="dk-row">
+        <span class="dk-row-l">검증된 강사 합격 실적</span>
+        <span class="dk-row-v orange">124,820건</span>
+      </div>
+      <div class="dk-row">
+        <span class="dk-row-l">수강생 만족도 조사</span>
+        <span class="dk-row-v">48,204건</span>
+      </div>
+      <div class="dk-row">
+        <span class="dk-row-l">평균 강사 경력</span>
+        <span class="dk-row-v">9.3년</span>
+      </div>
+      <div class="dk-row">
+        <span class="dk-row-l">강사 1인당 평균 수강생</span>
+        <span class="dk-row-v">18명</span>
+      </div>
+      <div class="dk-row">
+        <span class="dk-row-l">재수강율</span>
+        <span class="dk-row-v orange">67%</span>
+      </div>
+      <div class="dk-row">
+        <span class="dk-row-l">데이터 업데이트 주기</span>
+        <span class="dk-row-v">매 분기</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="f-logo">러<em>닉</em></div>
+    <div class="f-meta">© 2026 러닉 · 학원 강사 비교 플랫폼 · 9,284명 강사 데이터</div>
+  </div>
+</footer>
+
+</body>
+</html>
