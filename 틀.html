@@ -6,6 +6,13 @@
   <title>{{title}}</title>
   <meta name="robots" content="index,follow">
   <meta name="description" content="{{meta}}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{meta}}">
+  <meta property="og:url" content="{{페이지url}}">
+  <meta property="og:image" content="https://learnic.kr/img/lc-interior.webp">
+  <meta property="og:image:width" content="2048">
+  <meta property="og:image:height" content="1365">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://nam.veta.naver.com" crossorigin>
   <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" onload="this.onload=null;this.rel='stylesheet'">
@@ -224,42 +231,46 @@
     .lc-cur-item::before { content:'·'; flex-shrink:0; color:#FF4714; margin-top:1px; font-weight:900; }
     .lc-cur-item strong { font-weight:700; color:#fff; }
 
+    /* ── AI 이미지 ── */
+    .lc-ai-img-wrap { padding: 0 24px 56px; background: #fff; }
+    .lc-ai-img { width: 100%; max-width: 720px; border-radius: 20px; display: block; margin: 0 auto; }
+
     /* ── 추천 ── */
     .lc-rec-section { padding:72px 20px 80px; background:#fff; }
-    .lc-rec-inner { max-width:900px; margin:0 auto; }
-    .lc-rec-eyebrow { font-weight:900; text-transform:uppercase; font-size:.72rem; letter-spacing:.14em; text-align:center; margin-bottom:12px; color:#FF4714; }
-    .lc-rec-title { font-size:clamp(1.6rem,4vw,2.2rem); line-height:1.35; margin-bottom:48px; color:#111; font-weight:900; text-align:center; letter-spacing:-.04em; }
-    .lc-rec-cards { flex-direction:column; display:flex; gap:16px; }
-    @media(min-width:640px){ .lc-rec-cards{ gap:18px; flex-direction:row; } .lc-rec-card{ flex:1; } }
-    .lc-rec-card { gap:14px; overflow:hidden; display:flex; background:#fafafa; padding:28px 24px 26px; flex-direction:column; position:relative; border-radius:20px; border:1px solid #f0f0f0; }
-    .lc-rec-card::before { top:0; position:absolute; left:0; right:0; background:linear-gradient(90deg,#FF4714,#f6b01a); height:3px; content:''; }
+    .lc-rec-inner { margin:0 auto; max-width:900px; }
+    .lc-rec-eyebrow { font-size:.72rem; text-transform:uppercase; margin-bottom:12px; color:#FF4714; font-weight:900; letter-spacing:.14em; text-align:center; }
+    .lc-rec-title { text-align:center; color:#111; font-size:clamp(1.6rem,4vw,2.2rem); letter-spacing:-.04em; font-weight:900; margin-bottom:48px; line-height:1.35; }
+    .lc-rec-cards { flex-direction:column; gap:16px; display:flex; }
+    @media(min-width:640px){ .lc-rec-cards{ flex-direction:row; gap:18px; } .lc-rec-card{ flex:1; } }
+    .lc-rec-card { background:#fafafa; padding:28px 24px 26px; border:1px solid #f0f0f0; display:flex; position:relative; flex-direction:column; border-radius:20px; overflow:hidden; gap:14px; }
+    .lc-rec-card::before { position:absolute; top:0; right:0; background:linear-gradient(90deg,#FF4714,#f6b01a); left:0; height:3px; content:''; }
     .lc-rec-num { font-size:2.6rem; font-weight:900; background:linear-gradient(135deg,#FF4714,#f6b01a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
-    .lc-rec-card-title { line-height:1.45; font-weight:900; color:#111; font-size:1.08rem; }
-    .lc-rec-card-desc { color:#888; line-height:1.75; flex:1; font-size:.83rem; }
-    .lc-rec-check { font-size:.82rem; background:#fff5f2; display:flex; color:#444; font-weight:700; align-items:center; padding:8px 12px; gap:7px; border-radius:8px; }
-    .lc-rec-check::before { color:#FF4714; flex-shrink:0; font-weight:900; content:'✓'; font-size:.9rem; }
-    .lc-rec-footer { padding:28px 24px; border:1px solid #fde8df; text-align:center; background:linear-gradient(135deg,#fff7f4,#fffdf0); border-radius:16px; margin-top:44px; }
-    .lc-rec-footer-text { font-size:clamp(1rem,3vw,1.18rem); line-height:1.7; color:#111; font-weight:700; }
+    .lc-rec-card-title { font-size:1.08rem; color:#111; font-weight:900; line-height:1.45; }
+    .lc-rec-card-desc { font-size:.83rem; line-height:1.75; flex:1; color:#888; }
+    .lc-rec-check { display:flex; font-weight:700; color:#444; align-items:center; border-radius:8px; gap:7px; padding:8px 12px; font-size:.82rem; background:#fff5f2; }
+    .lc-rec-check::before { flex-shrink:0; font-size:.9rem; content:'✓'; color:#FF4714; font-weight:900; }
+    .lc-rec-footer { margin-top:44px; border:1px solid #fde8df; text-align:center; background:linear-gradient(135deg,#fff7f4,#fffdf0); padding:28px 24px; border-radius:16px; }
+    .lc-rec-footer-text { color:#111; font-size:clamp(1rem,3vw,1.18rem); line-height:1.7; font-weight:700; }
     .lc-rec-footer-hl { background:linear-gradient(90deg,#FF4714,#f6b01a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:900; }
 
     /* ── SECTIONS COMMON (유동 영역) ── */
     .lc-sec { padding: 90px 24px; }
-    .lc-sec-inner { max-width: 960px; margin: 0 auto; }
+    .lc-sec-inner { margin: 0 auto; max-width: 960px; }
     .lc-sec-dark { background: #f8f8f8; }
     .lc-sec-light { background: #fdfcf8; }
     .lc-sec-mid { background: #f3f3ef; }
-    .lc-sec h2 { line-height: 1.3; font-weight: 900; font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: #111; margin-bottom: 20px; letter-spacing: -.03em; word-break: keep-all; }
-    .lc-sec h3 { margin-bottom: 16px; margin-top: 28px; color: #111; font-size: 1.05rem; font-weight: 900; line-height: 1.5; }
-    .lc-sec-divider { background: #FF4714; height: 3px; margin-bottom: 24px; width: 48px; border-radius: 2px; }
-    .lc-body-text { line-height: 1.85; font-size: 1rem; color: #555; word-break: keep-all; }
-    .lc-text-card { border: 1px solid rgba(0,0,0,.08); background: #f0f0f0; border-radius: 20px; margin-top: 24px; padding: 36px 32px; }
-    .lc-text-card-light { padding: 36px 32px; border-radius: 20px; background: #fff; box-shadow: 0 4px 24px rgba(0,0,0,.06); border: 1px solid #e8e8e8; margin-top: 24px; }
-    .lc-check-list { flex-direction: column; margin-top: 24px; list-style: none; gap: 13px; display: flex; }
-    .lc-check-item { gap: 12px; align-items: flex-start; font-weight: 700; display: flex; line-height: 1.55; color: #444; font-size: .9rem; }
-    .lc-check-icon { font-weight: 900; margin-top: 2px; flex-shrink: 0; color: #FF4714; }
-    .lc-grade-grid { grid-template-columns: 1fr; display: grid; max-width: 960px; gap: 24px; margin: 32px auto 0; }
+    .lc-sec h2 { letter-spacing: -.03em; color: #111; word-break: keep-all; font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 20px; font-weight: 900; line-height: 1.3; }
+    .lc-sec h3 { margin-top: 28px; font-weight: 900; line-height: 1.5; font-size: 1.05rem; color: #111; margin-bottom: 16px; }
+    .lc-sec-divider { margin-bottom: 24px; width: 48px; background: #FF4714; height: 3px; border-radius: 2px; }
+    .lc-body-text { color: #555; word-break: keep-all; font-size: 1rem; line-height: 1.85; }
+    .lc-text-card { border-radius: 20px; margin-top: 24px; background: #f0f0f0; padding: 36px 32px; border: 1px solid rgba(0,0,0,.08); }
+    .lc-text-card-light { border: 1px solid #e8e8e8; border-radius: 20px; background: #fff; margin-top: 24px; box-shadow: 0 4px 24px rgba(0,0,0,.06); padding: 36px 32px; }
+    .lc-check-list { margin-top: 24px; display: flex; list-style: none; flex-direction: column; gap: 13px; }
+    .lc-check-item { font-size: .9rem; gap: 12px; line-height: 1.55; font-weight: 700; display: flex; color: #444; align-items: flex-start; }
+    .lc-check-icon { margin-top: 2px; font-weight: 900; color: #FF4714; flex-shrink: 0; }
+    .lc-grade-grid { gap: 24px; display: grid; margin: 32px auto 0; max-width: 960px; grid-template-columns: 1fr; }
     @media (min-width: 640px) { .lc-grade-grid { grid-template-columns: repeat(3,1fr); } }
-    .lc-grade-card { padding: 4px; transition: all .4s ease; background: #fff; border-radius: 24px; overflow: hidden; opacity: 0; position: relative; animation: fadeInUp .7s ease forwards; transform: translateY(30px); box-shadow: 0 8px 32px rgba(0,0,0,.07); }
+    .lc-grade-card { background: #fff; transition: all .4s ease; animation: fadeInUp .7s ease forwards; opacity: 0; overflow: hidden; transform: translateY(30px); border-radius: 24px; position: relative; padding: 4px; box-shadow: 0 8px 32px rgba(0,0,0,.07); }
     .lc-grade-card:nth-child(1) { animation-delay: .1s; }
     .lc-grade-card:nth-child(2) { animation-delay: .25s; }
     .lc-grade-card:nth-child(3) { animation-delay: .4s; }
@@ -267,55 +278,56 @@
     .lc-grade-card-1::before { background: linear-gradient(135deg,#3B82F6,#8B5CF6); }
     .lc-grade-card-2::before { background: linear-gradient(135deg,#FF4714,#EC4899); }
     .lc-grade-card-3::before { background: linear-gradient(135deg,#10B981,#06B6D4); }
-    .lc-grade-card:hover { transform: translateY(-10px); box-shadow: 0 22px 55px rgba(0,0,0,.12); }
-    .lc-grade-badge { justify-content: center; top: -12px; box-shadow: 0 6px 20px rgba(0,0,0,.2); display: flex; font-size: 1.2rem; font-weight: 900; align-items: center; border-radius: 50%; width: 56px; position: absolute; right: 24px; z-index: 10; height: 56px; color: #fff; }
+    .lc-grade-card:hover { box-shadow: 0 22px 55px rgba(0,0,0,.12); transform: translateY(-10px); }
+    .lc-grade-badge { font-weight: 900; color: #fff; font-size: 1.2rem; top: -12px; z-index: 10; position: absolute; border-radius: 50%; right: 24px; display: flex; height: 56px; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,.2); width: 56px; align-items: center; }
     .lc-grade-card-1 .lc-grade-badge { background: linear-gradient(135deg,#3B82F6,#8B5CF6); }
     .lc-grade-card-2 .lc-grade-badge { background: linear-gradient(135deg,#FF4714,#EC4899); }
     .lc-grade-card-3 .lc-grade-badge { background: linear-gradient(135deg,#10B981,#06B6D4); }
-    .lc-grade-content { padding: 40px 24px 32px; border-radius: 20px; background: #fff; }
-    .lc-grade-title { margin-bottom: 12px; font-size: 1.6rem; font-weight: 900; color: #111; }
-    .lc-grade-divider { border-radius: 2px; height: 3px; transition: width .3s; margin-bottom: 16px; width: 40px; }
+    .lc-grade-content { background: #fff; padding: 40px 24px 32px; border-radius: 20px; }
+    .lc-grade-title { font-size: 1.6rem; color: #111; margin-bottom: 12px; font-weight: 900; }
+    .lc-grade-divider { height: 3px; margin-bottom: 16px; width: 40px; border-radius: 2px; transition: width .3s; }
     .lc-grade-card-1 .lc-grade-divider { background: linear-gradient(90deg,#3B82F6,#8B5CF6); }
     .lc-grade-card-2 .lc-grade-divider { background: linear-gradient(90deg,#FF4714,#EC4899); }
     .lc-grade-card-3 .lc-grade-divider { background: linear-gradient(90deg,#10B981,#06B6D4); }
     .lc-grade-card:hover .lc-grade-divider { width: 64px; }
     .lc-grade-desc { font-size: .9rem; line-height: 1.65; color: #555; }
-    .lc-table-wrap { overflow-x: auto; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.08); margin-top: 28px; overflow: hidden; }
-    .lc-info-table { width: 100%; border-collapse: collapse; }
+    .lc-table-wrap { border-radius: 16px; margin-top: 28px; box-shadow: 0 4px 20px rgba(0,0,0,.08); overflow: hidden; overflow-x: auto; }
+    .lc-info-table { border-collapse: collapse; width: 100%; }
     .lc-info-table tr { border-bottom: 1px solid rgba(0,0,0,.07); }
     .lc-info-table tr:last-child { border-bottom: none; }
-    .lc-td-label { padding: 16px 20px; width: 120px; background: #FF4714; vertical-align: top; font-size: .88rem; color: #fff; white-space: nowrap; font-weight: 700; }
-    .lc-td-val { padding: 16px 20px; line-height: 1.6; background: #fff; font-size: .92rem; color: #333; }
-    .lc-faq-wrap { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
-    .lc-faq-item { border-radius: 14px; background: #fff; overflow: hidden; border: 1px solid #e5e5e5; }
-    .lc-faq-q { font-weight: 700; gap: 12px; font-size: .95rem; text-align: left; padding: 20px 22px; font-family: inherit; align-items: flex-start; background: none; cursor: pointer; border: none; color: #111; display: flex; justify-content: space-between; width: 100%; }
-    .lc-faq-arrow { font-size: 1rem; margin-top: 2px; flex-shrink: 0; color: #FF4714; transition: transform .3s; }
+    .lc-td-label { font-weight: 700; white-space: nowrap; color: #fff; background: #FF4714; padding: 16px 20px; vertical-align: top; font-size: .88rem; width: 120px; }
+    .lc-td-val { line-height: 1.6; font-size: .92rem; color: #333; background: #fff; padding: 16px 20px; }
+    .lc-faq-wrap { flex-direction: column; gap: 12px; margin-top: 28px; display: flex; }
+    .lc-faq-item { border-radius: 14px; border: 1px solid #e5e5e5; overflow: hidden; background: #fff; }
+    .lc-faq-q { width: 100%; font-family: inherit; padding: 20px 22px; border: none; cursor: pointer; gap: 12px; text-align: left; font-weight: 700; font-size: .95rem; display: flex; justify-content: space-between; align-items: flex-start; background: none; color: #111; }
+    .lc-faq-arrow { color: #FF4714; font-size: 1rem; margin-top: 2px; flex-shrink: 0; transition: transform .3s; }
     .lc-faq-item.lc-open .lc-faq-arrow { transform: rotate(180deg); }
-    .lc-faq-a { display: none; line-height: 1.75; font-size: .9rem; color: #555; padding: 0 22px 18px; }
+    .lc-faq-a { display: none; font-size: .9rem; line-height: 1.75; color: #555; padding: 0 22px 18px; }
     .lc-faq-item.lc-open .lc-faq-a { display: block; }
 
     /* ── 링크 섹션 ── */
-    .lc-lk-section { background: #f8f8f6; padding: 64px 24px 56px; border-bottom: 1px solid #ebebeb; }
-    .lc-lk-eyebrow { margin-bottom: 12px; letter-spacing: .22em; display: block; text-transform: uppercase; font-weight: 900; font-size: .68rem; color: #FF4714; }
-    .lc-lk-section h2 { font-weight: 900; letter-spacing: -.04em; line-height: 1.25; font-size: clamp(1.5rem, 3.5vw, 2.1rem); margin-bottom: 36px; color: #111; }
+    .lc-lk-section { padding: 64px 24px 56px; background: #f8f8f6; border-bottom: 1px solid #ebebeb; }
+    .lc-lk-eyebrow { margin-bottom: 12px; color: #FF4714; letter-spacing: .22em; font-weight: 900; font-size: .68rem; display: block; text-transform: uppercase; }
+    .lc-lk-section h2 { letter-spacing: -.04em; font-weight: 900; margin-bottom: 36px; color: #111; font-size: clamp(1.5rem, 3.5vw, 2.1rem); line-height: 1.25; }
+    #lc-lk-section h3 { font-weight: 900; letter-spacing: -.04em; color: #111; line-height: 1.25; font-size: clamp(1.5rem, 3.5vw, 2.1rem); margin-bottom: 36px; }
     .lc-lk-group { margin-bottom: 28px; }
     .lc-lk-group:last-child { margin-bottom: 0; }
-    .lc-lk-h3 { border-bottom: 2px solid #FF4714; font-size: .72rem; text-transform: uppercase; display: block; margin-bottom: 12px; padding-bottom: 10px; font-weight: 900; letter-spacing: .18em; color: #FF4714; }
-    .lc-lk-grid { gap: 10px; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); display: grid; }
-    .lc-lk-item { font-weight: 700; text-decoration: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.04); transition: all .2s; color: #333; white-space: nowrap; line-height: 52px; text-overflow: ellipsis; background: #fff; border: 1.5px solid #e8e8e8; font-size: .84rem; padding: 0 16px; text-align: center; overflow: hidden; display: block; height: 52px; }
-    .lc-lk-item:hover { transform: translateY(-2px); border-color: #FF4714; color: #fff; background: #FF4714; box-shadow: 0 6px 20px rgba(255,71,20,.28); }
+    .lc-lk-h3 { letter-spacing: .18em; display: block; padding-bottom: 10px; border-bottom: 2px solid #FF4714; font-size: .72rem; color: #FF4714; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; }
+    .lc-lk-grid { grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); display: grid; gap: 10px; }
+    .lc-lk-item { line-height: 52px; display: block; color: #333; border: 1.5px solid #e8e8e8; box-shadow: 0 2px 8px rgba(0,0,0,.04); text-align: center; text-overflow: ellipsis; text-decoration: none; padding: 0 16px; white-space: nowrap; font-size: .84rem; background: #fff; border-radius: 12px; transition: all .2s; font-weight: 700; overflow: hidden; height: 52px; }
+    .lc-lk-item:hover { box-shadow: 0 6px 20px rgba(255,71,20,.28); color: #fff; background: #FF4714; transform: translateY(-2px); border-color: #FF4714; }
     @media (max-width: 480px) {
       .lc-lk-section { padding: 48px 20px 44px; }
-      .lc-lk-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .lc-lk-item { font-size: .82rem; height: 48px; line-height: 48px; }
+      .lc-lk-grid { gap: 8px; grid-template-columns: repeat(2, 1fr); }
+      .lc-lk-item { font-size: .82rem; line-height: 48px; height: 48px; }
       .lc-monologue { font-size: 1.35rem; }
       .lc-fact-title { font-size: 1.9rem; }
     }
 
     /* ── 방법론 이미지 ── */
-    .lc-method-section { background: #fff; padding: 0 24px 72px; }
+    .lc-method-section { padding: 0 24px 72px; background: #fff; }
     .lc-method-inner { max-width: 480px; margin: 0 auto; }
-    .lc-method-img { display: block; box-shadow: 0 8px 28px rgba(0,0,0,.10); width: 100%; border-radius: 20px; }
+    .lc-method-img { width: 100%; display: block; box-shadow: 0 8px 28px rgba(0,0,0,.10); border-radius: 20px; }
 
     /* learnic.kr micro-variation */
     .lc-sec { padding: 92px 26px; }
@@ -324,15 +336,15 @@
     .lc-text-card { padding: 38px 34px; border-radius: 22px; }
     .lc-text-card-light { border-radius: 22px; padding: 38px 34px; }
     .lc-faq-item { border-radius: 16px; }
-    .lc-rec-card { border-radius: 22px; padding: 30px 26px 28px; }
+    .lc-rec-card { padding: 30px 26px 28px; border-radius: 22px; }
     .lc-body-text { line-height: 1.88; }
     .lc-monologue { line-height: 1.43; font-size: 1.63rem; }
     .lc-faq-a { line-height: 1.73; }
     .lc-rec-card-desc { line-height: 1.77; }
     .lc-header-logo { background: linear-gradient(135deg, #FF4714, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     /* dynamic section */
-    .lc-sec h2 { font-size: clamp(1.55rem,3.3vw,2.1rem); letter-spacing: -.04em; }
-    .lc-sec-divider { height: 2px; width: 36px; background: #ff5c2e; }
+    .lc-sec h2 { letter-spacing: -.04em; font-size: clamp(1.55rem,3.3vw,2.1rem); }
+    .lc-sec-divider { width: 36px; height: 2px; background: #ff5c2e; }
     .lc-sec-light { background: #fafaf8; }
     .lc-sec-dark { background: #f5f5f3; }
     .lc-sec-mid { background: #f0f0ec; }
@@ -442,7 +454,7 @@
     <p class="lc-monologue">공부 방법을 몰라서<br>다녀도 안 늘어요...</p>
     <p class="lc-monologue">학습 의지가 없어서<br>걱정이에요...</p>
     <div class="lc-fact-box">
-      <p class="lc-fact-title">지금 다니는 학원</p>
+      <p class="lc-fact-title">{{지역}} {{키워드}}</p>
       <p class="lc-fact-title"><span class="lc-simple-underline">이거 확인하셨나요?</span></p>
     </div>
   </div>
@@ -738,6 +750,8 @@
   </div>
 </section>
 
+{{랜덤이미지섹션}}
+
 <section class="lc-planner-section">
   <div class="lc-planner-inner">
     <p class="lc-planner-eyebrow">ACADEMY LOCATION</p>
@@ -763,7 +777,7 @@
      유동 영역 (DYNAMIC — result.html JSON)
      ════════════════════════════════════════════ -->
 
-<section class="lc-sec lc-sec-light">
+<section class="lc-sec lc-sec-light" id="sec1">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
     <h2>{{section1.h2}}</h2>
@@ -777,7 +791,7 @@
   </div>
 </section>
 
-<section class="lc-sec lc-sec-dark">
+<section class="lc-sec lc-sec-dark" id="sec2">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
     <h2>{{section2.h2}}</h2>
@@ -812,10 +826,10 @@
   </div>
 </section>
 
-<section class="lc-sec lc-sec-mid">
+<section class="lc-sec lc-sec-mid" id="sec3">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
-    <h2>{{section3.h2}}</h2>
+    <h2>{{지역}} 관리 학교</h2>
     <p class="lc-body-text">{{section3.p}}</p>
     <ul class="lc-check-list">
       <li class="lc-check-item"><span class="lc-check-icon">✓</span>{{section3.1}}</li>
@@ -825,7 +839,7 @@
   </div>
 </section>
 
-<section class="lc-sec lc-sec-light">
+<section class="lc-sec lc-sec-light" id="sec4">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
     <h2>{{section4.h2}}</h2>
@@ -835,7 +849,7 @@
   </div>
 </section>
 
-<section class="lc-sec lc-sec-dark">
+<section class="lc-sec lc-sec-dark" id="sec5">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
     <h2>{{section5.h2}}</h2>
@@ -843,7 +857,7 @@
   </div>
 </section>
 
-<section class="lc-sec lc-sec-mid">
+<section class="lc-sec lc-sec-mid" id="sec6">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
     <h2>{{section6.h2}}</h2>
@@ -851,7 +865,7 @@
   </div>
 </section>
 
-<section class="lc-sec lc-sec-light">
+<section class="lc-sec lc-sec-light" id="sec7">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
     <h2>{{section7.h2}}</h2>
@@ -861,7 +875,7 @@
   </div>
 </section>
 
-<section class="lc-sec lc-sec-dark">
+<section class="lc-sec lc-sec-dark" id="sec8">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
     <h2>{{section8.h2}}</h2>
@@ -874,7 +888,7 @@
 <section class="lc-sec lc-sec-light" id="info">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
-    <h2>{{section9.h2}}</h2>
+    <h2>{{지역}} {{키워드}} 정보</h2>
     <div class="lc-table-wrap">
       <table class="lc-info-table">
         <tr>
@@ -894,7 +908,7 @@
   </div>
 </section>
 
-<section class="lc-sec lc-sec-mid">
+<section class="lc-sec lc-sec-mid" id="faq">
   <div class="lc-sec-inner">
     <div class="lc-sec-divider"></div>
     <h2>{{section10.h2}}</h2>
@@ -906,6 +920,7 @@
 
 {{링크섹션}}
 
+{{학교ld}}
 
 <!-- ════════════════════════════════════════════
      스크립트
